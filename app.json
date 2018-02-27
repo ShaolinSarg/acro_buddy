@@ -1,6 +1,0 @@
-{
-  "name": "Acro buddy",
-  "description": "An acronym helper",
-  "image": "heroku/clojure",
-  "addons": []
-}

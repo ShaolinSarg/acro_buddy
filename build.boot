@@ -47,3 +47,6 @@
         (cljs :source-map true
               :optimizations :none)
         (target :dir #{"target"})))
+
+(deftask build []
+  (cljs :optimizations :advanced))
