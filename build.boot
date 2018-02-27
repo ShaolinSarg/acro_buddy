@@ -36,7 +36,7 @@
 
 
 (deftask dev []
-  (comp (serve :handler 'tdd-buddy.core/app
+  (comp (serve :handler 'acro-buddy.core/app
                :resource-root "target"
                :reload true
                :port 3000)
