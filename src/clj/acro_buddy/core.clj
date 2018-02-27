@@ -4,7 +4,8 @@
             [compojure.handler :refer [site]]
             [cheshire.core :as json :refer [generate-string]]
             [acro-buddy.matching :refer [describe-acronym]]
-            [ring.util.response :as resp]))
+            [ring.util.response :as resp]
+            [shoreleave.middleware.rpc :refer [wrap-rpc]]))
 
 (defroutes handler
   (GET "/" [] (resp/redirect "/home.html"))
@@ -19,4 +20,5 @@
   (not-found "Page not found"))
 
 (def app (-> (var handler)
+             (wrap-rpc)
              (site)))

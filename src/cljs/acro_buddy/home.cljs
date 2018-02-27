@@ -1,18 +1,22 @@
 (ns acro-buddy.home
   (:require [reagent.core :as r]
             [domina :as dom]
-            [clojure.string :refer [blank? trim]]))
+            [clojure.string :refer [blank? trim]]
+            [shoreleave.remotes.http-rpc :refer [remote-callback]]))
 
 (defn acronym-list [results]
   [:div
    (for [{:keys [name description]} @results]
-     [:div
-      ^{:key name} [:span (str name " - " description)]])])
+     ^{:key name} [:div
+                   [:span.acroName name]
+                   [:span.acroDesc description]])])
 
-(defn handle-search [criteria]
+(defn handle-search [criteria results]
   (let [acronym (trim (:acronym @criteria))]
     (when-not (blank? acronym)
-      [{:name "HMRC" :description "this is work"}])))
+      (remote-callback :describe-acronym-remote
+                       [acronym]
+                       #(reset! results %)))))
 
 (defn search-form []
   (let [criteria (r/atom {:acronym ""})
@@ -26,7 +30,7 @@
                  :on-change #(swap! criteria assoc :acronym (-> % .-target .-value))}]
         [:input {:type "button"
                  :value "search"
-                 :on-click #(reset! results (handle-search criteria))}]]
+                 :on-click #(handle-search criteria results)}]]
        [acronym-list results]])))
 
 
