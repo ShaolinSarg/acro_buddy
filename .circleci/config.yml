@@ -18,3 +18,9 @@ jobs:
     environment:
       BOOT_JVM_OPTIONS: "-Xms512m -Xmx1024m"
       BOOT_WATCHERS_DISABLE: "yes"
+
+  deployment:
+    staging:
+      branch: master
+      heroku:
+        appname: acro-buddy
