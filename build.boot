@@ -5,21 +5,21 @@
 
  :dependencies '[[org.clojure/clojure             "1.8.0"]
                  [org.clojure/clojurescript       "1.9.946"]
-                 [adzerk/boot-cljs                "2.1.4"]
-                 [adzerk/boot-reload              "0.5.2"]
+                 [compojure                       "1.6.0"]
+                 [javax.servlet/javax.servlet-api "4.0.0"]
+                 [domina                          "1.0.3"]
+                 [reagent                         "0.8.0-alpha2"]
+                 [cheshire                        "5.8.0"]
+                 [adzerk/boot-cljs                "2.1.4"  :scope "test"]
+                 [adzerk/boot-reload              "0.5.2"  :scope "test"]
                  [adzerk/boot-test                "1.2.0"  :scope "test"]
-                 [adzerk/boot-cljs-repl           "0.3.3"]
+                 [adzerk/boot-cljs-repl           "0.3.3"  :scope "test"]
                  [com.cemerick/piggieback         "0.2.1"  :scope "test"]
                  [weasel                          "0.7.0"  :scope "test"]
                  [org.clojure/tools.nrepl         "0.2.12" :scope "test"]
                  [pandeiro/boot-http              "0.8.3"  :scope "test"]
                  [crisptrutski/boot-cljs-test     "0.3.4"  :scope "test"]
-                 [compojure                       "1.6.0"]
-                 [javax.servlet/javax.servlet-api "4.0.0"]
-                 [domina                          "1.0.3"]
-                 [reagent                         "0.8.0-alpha2"]
-                 [adzerk/bootlaces                "0.1.13"]
-                 [cheshire "5.8.0"]])
+                 [adzerk/bootlaces                "0.1.13" :scope "test"]])
 
 (task-options!
  pom {:project 'org.clojars.shaolinsarg/acro-buddy
