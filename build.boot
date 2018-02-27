@@ -18,14 +18,16 @@
                  [javax.servlet/javax.servlet-api "4.0.0"]
                  [domina                          "1.0.3"]
                  [reagent                         "0.8.0-alpha2"]
-                 [adzerk/bootlaces                "0.1.13"]])
+                 [adzerk/bootlaces                "0.1.13"]
+                 [cheshire "5.8.0"]])
 
 (task-options!
  pom {:project 'org.clojars.shaolinsarg/acro-buddy
       :version "0.1.0-SNAPSHOT"
       :description "Whats that acronyn"
       :url "http://github.com/shaolinsarg/acro_buddy"
-      :scm {:url "http://github.com/shaolinsarg/acro_buddy"}})
+      :scm {:url "http://github.com/shaolinsarg/acro_buddy"}}
+ jar {:manifest {"Main-Class" "acro-buddy.core"}})
 
 
 (require '[adzerk.boot-cljs :refer [cljs]]
@@ -57,4 +59,5 @@
   (comp
    (pom)
    (jar)
-   (install)))
+   (install)
+   (target :dir #{"target"})))
