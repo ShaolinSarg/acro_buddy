@@ -50,3 +50,11 @@
 
 (deftask build []
   (cljs :optimizations :advanced))
+
+(deftask install-jar
+  []
+  (merge-env! :resource-paths #{"src/cljs" "src/clj"})
+  (comp
+   (pom)
+   (jar)
+   (install)))
