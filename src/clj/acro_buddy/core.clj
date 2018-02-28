@@ -28,4 +28,4 @@
              (site)))
 
 (defn -main []
-  (jetty/run-jetty app {:port (System/getenv "server.port")}))
+  (jetty/run-jetty app {:port (Integer. (System/getenv "PORT"))}))

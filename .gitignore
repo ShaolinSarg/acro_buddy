@@ -2,3 +2,4 @@ target/
 out/
 
 .nrepl*
+.DS_Store
