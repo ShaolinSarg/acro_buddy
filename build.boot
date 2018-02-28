@@ -7,7 +7,7 @@
                  [org.clojure/clojurescript       "1.9.946"]
                  [compojure                       "1.6.0"]
                  [javax.servlet/javax.servlet-api "4.0.0"]
-                 [ring/ring-jetty-adapter "1.3.1"]
+                 [ring/ring-jetty-adapter         "1.6.3"]
                  [domina                          "1.0.3"]
                  [reagent                         "0.8.0-alpha2"]
                  [cheshire                        "5.8.0"]
@@ -42,17 +42,19 @@
 
 
 (deftask dev []
-  (comp (serve :handler 'acro-buddy.core/app
-               :resource-root "target"
-               :reload true
-               :port 3000)
-        (watch)
-        (speak)
-        (reload :ws-host "localhost")
-        (cljs-repl)
-        (cljs :source-map true
-              :optimizations :none)
-        (target :dir #{"target"})))
+  (merge-env! :source-paths #{"test/clj"})
+  (comp
+   (serve :handler 'acro-buddy.core/app
+          :resource-root "target"
+          :reload true
+          :port 3000)
+   (watch)
+   (reload :ws-host "localhost")
+   (cljs-repl)
+   (cljs :source-map true
+         :optimizations :none)
+   (test :namespaces '#{acro-buddy.matching-test})
+   (target :dir #{"target"})))
 
 (deftask build
   "Build uberjar"
@@ -63,5 +65,4 @@
    (aot)
    (pom)
    (uber)
-   (jar)
-   (target :dir #{"target"})))
+   (jar)))
