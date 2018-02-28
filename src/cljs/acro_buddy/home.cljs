@@ -24,14 +24,16 @@
   (let [criteria (r/atom {:acronym ""})]
     (fn []
       [:div
-       [:form
-        [:input {:type "text"
-                 :placeholder "Search Hackronym here"
-                 :value (:acronym @criteria)
-                 :on-change #(swap! criteria assoc :acronym (-> % .-target .-value))}]
-        [:input {:type "button"
-                 :value "search"
-                 :on-click #(handle-search criteria)}]]
+       [:input {:type "text"
+                :placeholder "Search Hackronym here"
+                :style {:width "20%"}
+                :value (:acronym @criteria)
+                :on-change #(swap! criteria assoc :acronym (-> %
+                                                               .-target
+                                                               .-value))}]
+       [:input {:type "button"
+                :value "search"
+                :on-click #(handle-search criteria)}]
        [acronym-list]])))
 
 
