@@ -7,6 +7,7 @@
                  [org.clojure/clojurescript       "1.9.946"]
                  [compojure                       "1.6.0"]
                  [javax.servlet/javax.servlet-api "4.0.0"]
+                 [ring/ring-jetty-adapter "1.3.1"]
                  [domina                          "1.0.3"]
                  [reagent                         "0.8.0-alpha2"]
                  [cheshire                        "5.8.0"]
@@ -29,7 +30,8 @@
       :description "Whats that acronyn"
       :url "http://github.com/shaolinsarg/acro_buddy"
       :scm {:url "http://github.com/shaolinsarg/acro_buddy"}}
- jar {:manifest {"Main-Class" "acro-buddy.core"}})
+ aot {:namespace '#{acro-buddy.core}}
+ jar {:main 'acro_buddy.core})
 
 
 (require '[adzerk.boot-cljs :refer [cljs]]
@@ -52,14 +54,14 @@
               :optimizations :none)
         (target :dir #{"target"})))
 
-(deftask build []
-  (cljs :optimizations :advanced))
-
-(deftask install-jar
+(deftask build
+  "Build uberjar"
   []
   (merge-env! :resource-paths #{"src/cljs" "src/clj"})
   (comp
+   (cljs :optimizations :advanced)
+   (aot)
    (pom)
+   (uber)
    (jar)
-   (install)
    (target :dir #{"target"})))
