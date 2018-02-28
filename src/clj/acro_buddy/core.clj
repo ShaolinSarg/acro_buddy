@@ -15,8 +15,10 @@
   (GET "/acronym/:acro" [acro]
     {:status 200
      :headers {"Content-Type" "application/json; charset=utf-8"}
-     :body (json/generate-string (describe-acronym acro))})
-
+     :body (-> acro
+               (describe-acronym)
+               (json/generate-string))})
+  
   (files "/" {:root "target"})
   (resources "/" {:root "target"})
   (not-found "Page not found"))
@@ -26,4 +28,4 @@
              (site)))
 
 (defn -main []
-  (jetty/run-jetty app {:port 8128}))
+  (jetty/run-jetty app {:port (System/getenv "server.port")}))
