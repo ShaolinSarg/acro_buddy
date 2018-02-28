@@ -65,4 +65,6 @@
    (aot)
    (pom)
    (uber)
-   (jar)))
+   (jar :file "acro_buddy.jar")
+   (sift :include #{#"acro_buddy.jar"})
+   (target :dir #{"target"})))
