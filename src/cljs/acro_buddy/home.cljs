@@ -16,7 +16,7 @@
 (defn handle-search [criteria]
   (let [acronym (trim (:acronym @criteria))]
     (when-not (blank? acronym)
-      (remote-callback :describe-acronym-remote
+      (remote-callback :describe-acronym
                        [acronym]
                        #(reset! results %)))))
 

@@ -7,7 +7,7 @@
                  [org.clojure/clojurescript       "1.9.946"]
                  [compojure                       "1.6.0"]
                  [javax.servlet/javax.servlet-api "4.0.0"]
-                 [ring/ring-jetty-adapter         "1.6.3"]
+                 [ring/ring-jetty-adapter         "1.3.1"]
                  [domina                          "1.0.3"]
                  [reagent                         "0.8.0-alpha2"]
                  [cheshire                        "5.8.0"]
