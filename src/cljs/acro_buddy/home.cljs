@@ -4,14 +4,16 @@
             [clojure.string :refer [blank? trim]]
             [shoreleave.remotes.http-rpc :refer [remote-callback]]))
 
-(defn acronym-list [results]
+(def results (r/atom []))
+
+(defn acronym-list []
   [:div
    (for [{:keys [name description]} @results]
      ^{:key name} [:div
                    [:span.acroName name]
                    [:span.acroDesc description]])])
 
-(defn handle-search [criteria results]
+(defn handle-search [criteria]
   (let [acronym (trim (:acronym @criteria))]
     (when-not (blank? acronym)
       (remote-callback :describe-acronym-remote
@@ -19,8 +21,7 @@
                        #(reset! results %)))))
 
 (defn search-form []
-  (let [criteria (r/atom {:acronym ""})
-        results (r/atom [])]
+  (let [criteria (r/atom {:acronym ""})]
     (fn []
       [:div
        [:form
@@ -30,8 +31,8 @@
                  :on-change #(swap! criteria assoc :acronym (-> % .-target .-value))}]
         [:input {:type "button"
                  :value "search"
-                 :on-click #(handle-search criteria results)}]]
-       [acronym-list results]])))
+                 :on-click #(handle-search criteria)}]]
+       [acronym-list]])))
 
 
 (defn home-components []

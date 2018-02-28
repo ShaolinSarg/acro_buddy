@@ -5,7 +5,9 @@
             [cheshire.core :as json :refer [generate-string]]
             [acro-buddy.matching :refer [describe-acronym]]
             [ring.util.response :as resp]
-            [shoreleave.middleware.rpc :refer [wrap-rpc]]))
+            [shoreleave.middleware.rpc :refer [wrap-rpc]]
+            [ring.adapter.jetty :as jetty])
+  (:gen-class))
 
 (defroutes handler
   (GET "/" [] (resp/redirect "/home.html"))
@@ -22,3 +24,6 @@
 (def app (-> (var handler)
              (wrap-rpc)
              (site)))
+
+(defn -main []
+  (jetty/run-jetty app {:port 8128}))
