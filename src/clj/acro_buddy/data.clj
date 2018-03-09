@@ -2,6 +2,7 @@
 
 (def acronym-data
   (atom {
+         "SME" [{:description "a person who is an authority in a particular area or topic." :name "Subject-matter expert"}]
          "HMRC" [{:description "Her Majesty's Revenue and Customs (HM Revenue and Customs or HMRC is a non-ministerial department of the UK Government responsible for the collection of taxes, the payment of some forms of state support and the administration of other regulatory regimes including the national minimum wage."
                   :name "Her Majesty's Revenue and Customs"}]
          "SA" [{:description "Self Assessment is a system HM Revenue and Customs (HMRC) uses to collect Income Tax. Tax is usually deducted automatically from wages, pensions and savings. People and businesses with other income must report it in a tax return. If you need to send one, you fill it in after the end of the tax year (5 April) it applies to."
